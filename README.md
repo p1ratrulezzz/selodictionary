@@ -1,0 +1,2 @@
+# selodictionary
+Сельский словарь
