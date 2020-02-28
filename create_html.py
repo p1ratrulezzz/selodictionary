@@ -1,15 +1,27 @@
 import markdown
 from mako.template import Template
+from xml.dom import minidom
 
+def RenderIndexHtml(model):
+    tpl = Template(filename="templates/index.html.tpl", input_encoding='utf-8')
+    html = tpl.render(page=model)
+
+    output = open("index.html", "w")
+    output.write(html)
+    output.close()
+
+# Prepare model data
 mdfile = open("README.md", "r")
 
+html = markdown.markdown(mdfile.read())
+doc = minidom.parseString(html)
+
 page = {}
-page['content'] = markdown.markdown(mdfile.read())
+page['content'] = html
 mdfile.close()
 
-tpl = Template(filename="templates/index.html.tpl", input_encoding='utf-8')
-html = tpl.render(page=(page))
+# Parse html and sort nodes alphabetically
+# Remove the header
 
-output = open("index.html", "w")
-output.write(html)
-output.close()
+# Write output file
+RenderIndexHtml(page)

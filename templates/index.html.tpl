@@ -12,7 +12,25 @@
 </head>
 <body>
 <div class="main-wrapper container">
-    ${page['content']}
+    <div class="row row-cols-2">
+        <!--
+        <div class="col-sm-2">
+            <nav id="navbar-example3" class="navbar navbar-light bg-light">
+                <nav class="nav nav-pills flex-column">
+                    <a class="nav-link" href="#item-1">Item 1</a>
+                    <a class="nav-link" href="#item-2">Item 2</a>
+                    <a class="nav-link" href="#item-3">Item 3</a>
+                </nav>
+            </nav>
+        </div> -->
+        <div class="col-sm">
+            ${page['content']}
+        </div>
+    </div>
+</div>
+
+<div class="footer-wrapper container">
+    <a href="https://github.com/p1ratrulezzz/selodictionary/blob/master/README.md">Добавить еще слов в сельский словарь</a>
 </div>
 
 <!-- Optional JavaScript -->
