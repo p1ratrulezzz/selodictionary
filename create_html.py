@@ -24,6 +24,8 @@ page["title"] = headerEl.childNodes[0].data
 headerEl.parentNode.removeChild(headerEl)
 
 words = []
+keywords = []
+keywords.append("")
 
 for pEl in doc.documentElement.childNodes:
     if (pEl.nodeType != pEl.ELEMENT_NODE):
@@ -33,10 +35,16 @@ for pEl in doc.documentElement.childNodes:
     for strongEl in pEl.getElementsByTagName('strong'):
         text.append(strongEl.firstChild.data)
 
+    word = " ".join(text).capitalize()
     words.append({
-        "text": " ".join(text).capitalize(),
+        "text": word,
         "element": pEl,
     })
+
+    keywords.append(word.lower())
+
+
+page["keywords"] = ",".join(keywords)
 
 
 def sort_words(v):
