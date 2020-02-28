@@ -24,6 +24,7 @@
             </nav>
         </div> -->
         <div class="col-sm">
+            <h1>${page['title']}</h1>
             ${page['content']}
         </div>
     </div>
