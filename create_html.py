@@ -1,6 +1,7 @@
 import markdown
 from mako.template import Template
 from xml.dom import minidom
+from collections import OrderedDict
 
 def RenderIndexHtml(model):
     tpl = Template(filename="templates/index.html.tpl", input_encoding='utf-8')
@@ -52,11 +53,21 @@ def sort_words(v):
 
 words.sort(key=sort_words)
 
-page["content"] = "\n"
+page["dictionary"] = OrderedDict()
 
+glossaryIndex = 0
 for word in words:
-    page["content"] += word['element'].toxml() + "\n"
+    firstLetter = word['text'][0:1].lower()
+    if (firstLetter not in page["dictionary"]):
+        page["dictionary"][firstLetter] = {
+            'words': [],
+            'index': glossaryIndex,
+            'letter': firstLetter.upper()
+        }
 
+        glossaryIndex += 1
+
+    page["dictionary"][firstLetter]['words'].append(word['element'].toxml())
 
 # Parse html and sort nodes alphabetically
 # Remove the header

@@ -21,26 +21,38 @@
 </head>
 <body>
 <div class="main-wrapper container">
-    <div class="row row-cols-2">
-        <!--
-        <div class="col-sm-2">
-            <nav id="navbar-example3" class="navbar navbar-light bg-light">
-                <nav class="nav nav-pills flex-column">
-                    <a class="nav-link" href="#item-1">Item 1</a>
-                    <a class="nav-link" href="#item-2">Item 2</a>
-                    <a class="nav-link" href="#item-3">Item 3</a>
-                </nav>
-            </nav>
-        </div> -->
-        <div class="col-sm">
-            <h1>${page['title']}</h1>
-            ${page['content']}
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><a href="/"><h1>${page['title']}</h1></a></a>
         </div>
     </div>
-</div>
+    <div class="row row-cols-2">
+        <div class="col-sm col-sm-1">
+            <nav id="glossary-navigation" class="navbar navbar-fixed-left sticky-top">
+                <nav class="nav navbar-glossary">
+                    % for key in page['dictionary']:
+                    <% item = page['dictionary'][key] %>
+                        <a class="nav-link" href="#glossary-index-${item['index']}">${item['letter']}</a>
+                    % endfor
+                </nav>
+            </nav>
+        </div>
+        <div class="col-sm" data-spy="scroll" data-offset="0" data-target="#glossary-navigation">
 
-<div class="footer-wrapper container">
-    <a href="https://github.com/p1ratrulezzz/selodictionary/blob/master/README.md">Добавить еще слов в сельский словарь</a>
+            % for key in page['dictionary']:
+                <% item = page['dictionary'][key] %>
+                <h4 id="glossary-index-${item['index']}"></h4>
+                % for word in item['words']:
+                    ${word}
+                % endfor
+            % endfor
+
+            <div class="footer-wrapper">
+                <a href="https://github.com/p1ratrulezzz/selodictionary/blob/master/README.md">Добавить еще слов в сельский словарь</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Optional JavaScript -->
