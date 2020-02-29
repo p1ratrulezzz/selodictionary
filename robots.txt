@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: 
+Disallow: /CNAME
+Allow: /index.html
+Allow: /humans.txt
