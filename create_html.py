@@ -43,6 +43,7 @@ for pEl in doc.documentElement.childNodes:
     })
 
     keywords.append(word.lower())
+    keywords.append(word.lower() + ' что такое')
 
 
 page["keywords"] = ",".join(keywords)
