@@ -32,13 +32,16 @@ for pEl in doc.documentElement.childNodes:
     if (pEl.nodeType != pEl.ELEMENT_NODE):
         continue
 
+    strongElData = pEl.getElementsByTagName('strong')[0].firstChild.data
+    pEl.getElementsByTagName('strong')[0].firstChild.data = str(strongElData).capitalize()
+
     text = []
     for strongEl in pEl.getElementsByTagName('strong'):
         text.append(strongEl.firstChild.data)
 
     word = " ".join(text).capitalize()
     words.append({
-        "text": word.capitalize(),
+        "text": word,
         "element": pEl,
     })
 
