@@ -38,7 +38,7 @@ for pEl in doc.documentElement.childNodes:
 
     word = " ".join(text).capitalize()
     words.append({
-        "text": word,
+        "text": word.capitalize(),
         "element": pEl,
     })
 
