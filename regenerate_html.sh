@@ -23,6 +23,8 @@ if [[ "$INSTALL_PACKETS" = "yes" ]]; then
     echo "Installing python3 packets";
     pip3 install markdown
     pip3 install mako
+    pip3 install transliterate
+    pip3 install pathvalidate
 fi
 
 echo "Regenerating index.html...";

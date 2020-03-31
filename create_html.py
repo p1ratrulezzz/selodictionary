@@ -2,6 +2,9 @@ import markdown
 from mako.template import Template
 from xml.dom import minidom
 from collections import OrderedDict
+from transliterate import translit
+from pathvalidate import sanitize_filename
+import os.path
 
 def RenderIndexHtml(model):
     tpl = Template(filename="templates/index.html.tpl", input_encoding='utf-8')
@@ -10,6 +13,35 @@ def RenderIndexHtml(model):
     output = open("index.html", "w")
     output.write(html)
     output.close()
+
+def RenderWordHtml(model):
+    outputFile = translit(model['text'], reversed=True)
+    outputFile = sanitize_filename(outputFile).\
+        replace('\'', '').\
+        replace('"', '').\
+        replace(' ', '_').\
+        lower()
+
+    postfixBase = ''
+    postfix = ''
+    index = 1
+
+    outputFilePath = 'words/' + outputFile + str(postfix) + '.html'
+    # @todo: Handle same names?
+    # while os.path.isfile(outputFilePath):
+    #     postfix = postfixBase + str(index)
+    #     outputFilePath = 'words/' + outputFile + str(postfix) + '.html'
+    #     index += 1
+
+    model['description_html'] = model['element'].toxml()
+    tpl = Template(filename="templates/one_letter.html.tpl", input_encoding='utf-8')
+    html = tpl.render(word=model)
+
+    output = open(outputFilePath, "w")
+    output.write(html)
+    output.close()
+
+    model['uri'] = outputFilePath
 
 # Prepare model data
 page = {}
@@ -40,10 +72,30 @@ for pEl in doc.documentElement.childNodes:
         text.append(strongEl.firstChild.data)
 
     word = " ".join(text).capitalize()
-    words.append({
+    wordObj = {
         "text": word,
         "element": pEl,
-    })
+    }
+
+    # Render a page for a singe word.
+    RenderWordHtml(wordObj)
+
+    linkElement = doc.createElement('a')
+    linkElement.setAttribute('href', wordObj['uri'])
+
+    strongEls = pEl.getElementsByTagName('strong')
+    lastStrongEl = strongEls.item(strongEls.length - 1)
+    strongElsArrayReversed = []
+    while lastStrongEl != None:
+        strongElsArrayReversed.append(lastStrongEl)
+        lastStrongEl = lastStrongEl.previousSibling
+
+    for el in reversed(strongElsArrayReversed):
+        linkElement.appendChild(el)
+
+    pEl.insertBefore(linkElement, pEl.firstChild)
+
+    words.append(wordObj)
 
     keywords.append(word.lower())
     keywords.append(word.lower() + ' что такое')
