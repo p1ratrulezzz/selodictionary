@@ -8,16 +8,26 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Сельский словарь - ${word['text']}}</title>
+    <title>Сельский словарь - ${word['text']}</title>
 
     <meta name="description" content="Словарь с неординарными фразами, о которых мало кто слышал. Узнай новые слова и выпендрись перед тянками!">
-    <meta name="keywords" content="словарь, сельский словарь, модные слова, современный словарь, современные слова, интересные слова,киривзить,киривзить что такое,колумбить,колумбить что такое,засабзирить,засабзирить что такое,закевларить,закевларить что такое,дать в зад,дать в зад что такое,притараканить,притараканить что такое,трансортир,трансортир что такое,шлюндриться хвастаться,шлюндриться хвастаться что такое,илюха нассал,илюха нассал что такое,надорвать кишки,надорвать кишки что такое,джасткаузить,джасткаузить что такое,дезолян сорян сорян,дезолян сорян сорян что такое,жакфрескить,жакфрескить что такое,жежнить,жежнить что такое,подкидывать какахи на вентилятор,подкидывать какахи на вентилятор что такое,ек ирув,ек ирув что такое,вн есть,вн есть что такое,бьянтомаль,бьянтомаль что такое,фартнуть,фартнуть что такое,кринж,кринж что такое">
+    <meta name="keywords" content="${word['text']}, ${word['text']} что такое">
     <meta name="robots" content="index, follow">
     <meta name="language" content="RU">
     <meta name="author" content="P1ratRuleZZZ">
     <meta name="distribution" content="global">
     <meta name="rating" content="mature">
     <meta name="generator" content="FreeMetaTagGenerator.com">
+
+    <!-- Open Graph Generated: a.pr-cy.ru -->
+    <meta name="og:title" content="${word['text']}">
+    <meta name="og:description" content="${word['description']}">
+    <meta name="og:site_name" content="Сельский словарь">
+    <meta name="og:locale" content="ru_RU">
+    <meta name="og:type" content="article">
+    <!-- Open Graph: Article -->
+    <meta name="og:published_time" content="2020-04-01T00:54:26+03:00">
+    <meta name="og:modified_time" content="${word['modified_iso']}">
 </head>
 <body>
 <div class="main-wrapper container">

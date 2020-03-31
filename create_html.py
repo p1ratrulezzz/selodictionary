@@ -5,6 +5,8 @@ from collections import OrderedDict
 from transliterate import translit
 from pathvalidate import sanitize_filename
 import os.path
+import datetime
+import xml.etree.ElementTree
 
 def RenderIndexHtml(model):
     tpl = Template(filename="templates/index.html.tpl", input_encoding='utf-8')
@@ -13,6 +15,9 @@ def RenderIndexHtml(model):
     output = open("index.html", "w")
     output.write(html)
     output.close()
+
+def remove_tags(text):
+    return ''.join(xml.etree.ElementTree.fromstring(text).itertext())
 
 def RenderWordHtml(model):
     outputFile = translit(model['text'], reversed=True)
@@ -34,6 +39,13 @@ def RenderWordHtml(model):
     #     index += 1
 
     model['description_html'] = model['element'].toxml()
+    model['description'] = remove_tags(model['description_html'])
+    model['modified_iso'] = datetime.\
+        datetime.\
+        utcnow().\
+        replace(microsecond=0).\
+        isoformat()
+
     tpl = Template(filename="templates/one_letter.html.tpl", input_encoding='utf-8')
     html = tpl.render(word=model)
 
