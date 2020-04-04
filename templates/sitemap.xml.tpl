@@ -9,7 +9,7 @@
     % for word in words:
     <url>
         <loc>${url}/${word['uri']}</loc>
-        <lastmod>/${word['modified_iso']}</lastmod>
+        <lastmod>${word['modified_iso']}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
