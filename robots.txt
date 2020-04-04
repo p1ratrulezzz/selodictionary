@@ -1,5 +1,4 @@
 User-Agent: *
-Disallow: 
+Disallow:
 Disallow: /CNAME
-Allow: /index.html
-Allow: /humans.txt
+Sitemap: https://selodict.p1ratrulezzz.com/sitemap.xml

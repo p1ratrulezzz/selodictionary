@@ -19,6 +19,22 @@ def RenderIndexHtml(model):
 def remove_tags(text):
     return ''.join(xml.etree.ElementTree.fromstring(text).itertext())
 
+def CurrentTimeISO():
+    return datetime. \
+        datetime. \
+        utcnow(). \
+        replace(microsecond=0). \
+        isoformat()
+
+def RenderSitemap(words):
+    tpl = Template(filename="templates/sitemap.xml.tpl", input_encoding='utf-8')
+    # @todo: Read the url from CNAME file
+    xml = tpl.render(words=words, modified = CurrentTimeISO(), url = 'https://selodict.p1ratrulezzz.com')
+
+    output = open("sitemap.xml", "w")
+    output.write(xml)
+    output.close()
+
 def RenderWordHtml(model):
     outputFile = translit(model['text'], reversed=True)
     outputFile = sanitize_filename(outputFile).\
@@ -40,11 +56,7 @@ def RenderWordHtml(model):
 
     model['description_html'] = model['element'].toxml()
     model['description'] = remove_tags(model['description_html'])
-    model['modified_iso'] = datetime.\
-        datetime.\
-        utcnow().\
-        replace(microsecond=0).\
-        isoformat()
+    model['modified_iso'] = CurrentTimeISO()
 
     tpl = Template(filename="templates/one_letter.html.tpl", input_encoding='utf-8')
     html = tpl.render(word=model)
@@ -142,3 +154,6 @@ for word in words:
 
 # Write output file
 RenderIndexHtml(page)
+
+# Sitemap
+RenderSitemap(words)
