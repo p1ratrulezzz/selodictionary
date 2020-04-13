@@ -26,10 +26,16 @@ def CurrentTimeISO():
         replace(microsecond=0). \
         isoformat()
 
+def CurrentTimeSitemap():
+    return datetime. \
+        datetime. \
+        utcnow(). \
+	strftime('%Y-%m-%d')
+
 def RenderSitemap(words):
     tpl = Template(filename="templates/sitemap.xml.tpl", input_encoding='utf-8')
     # @todo: Read the url from CNAME file
-    xml = tpl.render(words=words, modified = CurrentTimeISO(), url = 'https://selodict.p1ratrulezzz.com')
+    xml = tpl.render(words=words, modified = CurrentTimeSitemap(), url = 'https://selodict.p1ratrulezzz.com')
 
     output = open("sitemap.xml", "w")
     output.write(xml)
@@ -57,6 +63,7 @@ def RenderWordHtml(model):
     model['description_html'] = model['element'].toxml()
     model['description'] = remove_tags(model['description_html'])
     model['modified_iso'] = CurrentTimeISO()
+    model['modified_sitemap'] = CurrentTimeSitemap()
 
     tpl = Template(filename="templates/one_letter.html.tpl", input_encoding='utf-8')
     html = tpl.render(word=model)
