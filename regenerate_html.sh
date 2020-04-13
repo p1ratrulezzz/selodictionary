@@ -3,7 +3,7 @@
 wd=$(pwd -P)
 cd $(dirname $0)
 
-if [ -z $(which pyvenv-3.4) ]; then
+if [ -z $(which pyvenv-3.6) ]; then
     echo "Please, install python3-venv first. Exiting."
     exit 1;
 fi
