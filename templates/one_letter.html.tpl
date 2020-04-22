@@ -10,7 +10,7 @@
 
     <title>Сельский словарь - ${word['text']}</title>
 
-    <meta name="description" content="Словарь с неординарными фразами, о которых мало кто слышал. Узнай новые слова и выпендрись перед тянками!">
+    <meta name="description" content="${word['description']}">
     <meta name="keywords" content="${word['text']}, ${word['text']} что такое">
     <meta name="robots" content="index, follow">
     <meta name="language" content="RU">

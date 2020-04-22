@@ -11,13 +11,13 @@ fi
 INSTALL_PACKETS="no"
 if [ ! -d "venv" ]; then
     echo "Creating virtual env venv";
-    python3 -m venv venv
+    python3.6 -m venv venv
     INSTALL_PACKETS="yes"
 else
     echo "Virtual env already exists"
 fi
 
-source venv/bin/activate
+source venv/bin/activate || exit 1
 
 if [[ "$INSTALL_PACKETS" = "yes" ]]; then
     echo "Installing python3 packets";
