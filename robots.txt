@@ -1,4 +1,3 @@
 User-Agent: *
-Disallow:
 Disallow: /CNAME
 Sitemap: https://selodict.p1ratrulezzz.com/sitemap.xml
