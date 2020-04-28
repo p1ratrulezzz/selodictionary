@@ -34,7 +34,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><a href="/"><h1>Сельский словарь</h1></a></a>
+            <a class="navbar-brand" href="/"><a href="/"><h1>Сельский словарь - ${word['text']}</h1></a></a>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
