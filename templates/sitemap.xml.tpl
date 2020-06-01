@@ -4,14 +4,14 @@
         <loc>${url}/</loc>
         <lastmod>${modified}</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.8</priority>
+        <priority>0.5</priority>
     </url>
     % for word in words:
     <url>
         <loc>${url}/${word['uri']}</loc>
         <lastmod>${word['modified_sitemap']}</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.5</priority>
+        <priority>0.8</priority>
     </url>
     % endfor
 </urlset>
