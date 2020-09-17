@@ -26,3 +26,6 @@ jobs:
     - name: Install dependencies
       run: |
         echo "test"
+        pwd -P
+        chmod +x ./regenerate_html.sh
+        ./regenerate_html.sh
