@@ -25,6 +25,7 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
+        sudo apt install -y python3-venv
         echo "test"
         pwd -P
         chmod +x ./regenerate_html.sh
