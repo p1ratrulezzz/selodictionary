@@ -27,13 +27,12 @@ jobs:
       run: |
         KEY_PATH=$(pwd -P)"/deployment-private.key"
         KEY_PATH_PUB=$(pwd -P)"/deployment-public.key"
-        echo "${SSH_KEY_PUB}" > "${KEY_PATH_PUB}"
+        echo ${{ secrets.SSH_KEY_PUB }} > "${KEY_PATH_PUB}"
         echo "Adding an SSH key to agent"
         eval $(ssh-agent -s)
         touch "${KEY_PATH}"
         chmod 0600 "${KEY_PATH}"
-        echo "${SSH_KEY_RSA}" > "${KEY_PATH}"
-        cat "${KEY_PATH}"
+        echo ${{ secrets.SSH_KEY_RSA }} > "${KEY_PATH}"
         ssh-add -t 3600 "${KEY_PATH}"
         sudo apt install -y python3-venv git
         git rm -r words
@@ -47,3 +46,5 @@ jobs:
         git pull origin master
         git merge build-master
         git push origin master
+        rm "${KEY_PATH_PUB}
+        rm "${KEY_PATH_PUB}"
