@@ -13,19 +13,36 @@ jobs:
   # This workflow contains a single job called "greet"
   build:
     # The type of runner that the job will run on
-    runs-on: peppa-runner
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
     - uses: actions/checkout@v2
-      name: 'Checkout'
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
     - name: Install dependencies
       run: |
+        KEY_PATH=$(pwd -P)"/deployment-private.key"
+        KEY_PATH_PUB=$(pwd -P)"/deployment-public.key"
+        echo "${SSH_KEY_PUB}" > "${KEY_PATH_PUB}"
+        echo "Adding an SSH key to agent"
+        eval $(ssh-agent -s)
+        touch "${KEY_PATH}"
+        chmod 0600 "${KEY_PATH}"
+        echo "${SSH_KEY_RSA}" > "${KEY_PATH}"
+        ssh-add -t 3600 "${KEY_PATH}"
+        sudo apt install -y python3-venv git
         git rm -r words
         mkdir words
         chmod +x ./regenerate_html.sh
         ./regenerate_html.sh
         git add words
         git add index.html sitemap.xml
-        git push -f origin build-master
+        git commit -m"Words CI update"
+        git checkout master
+        git pull origin master
+        git merge build-master
+        git push origin master
