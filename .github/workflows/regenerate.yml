@@ -28,6 +28,7 @@ jobs:
         SSH_PUBKEY: ${{ secrets.SSH_KEY_PUB  }}
         SSH_PRIVATEKEY: ${{ secrets.SSH_KEY_RSA }}
       run: |
+        git config pull.rebase false
         git config user.name "p1ratrulezzz"
         git config user.email "git@p1ratrulezzz.me"
         KEY_PATH=$(pwd -P)"/deployment-private.key"
@@ -51,6 +52,6 @@ jobs:
         git checkout -b master origin/master
         git pull origin master
         git merge build-master
-        git push origin master
+        git push -f origin master
         rm "${KEY_PATH_PUB}
         rm "${KEY_PATH_PUB}"
