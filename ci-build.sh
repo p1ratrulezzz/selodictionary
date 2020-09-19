@@ -28,5 +28,5 @@ git add words
 git add index.html sitemap.xml
 git commit -m"Words CI update"
 git push -f origin master
-rm "${KEY_PATH_PUB}"
-rm "${KEY_PATH_PUB}"
+rm -f "${KEY_PATH_PUB}"
+rm -f "${KEY_PATH_PUB}"
