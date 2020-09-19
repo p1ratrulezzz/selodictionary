@@ -26,7 +26,7 @@ chmod +x ./regenerate_html.sh
 echo "Add to git"
 git add words
 git add index.html sitemap.xml
-git commit -m"Words CI update"
+git commit -m"[skip-ci] Words CI update"
 git push -f origin master
 rm -f "${KEY_PATH_PUB}"
 rm -f "${KEY_PATH_PUB}"
