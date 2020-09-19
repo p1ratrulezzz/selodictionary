@@ -19,14 +19,12 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
     - name: Install dependencies
       run: |
-        sudo apt install -y python3-venv
-        echo "test"
-        pwd -P
+        git rm -r words
+        mkdir words
         chmod +x ./regenerate_html.sh
         ./regenerate_html.sh
+        git add words
+        git add index.html sitemap.xml
+        git push -f origin build-master
