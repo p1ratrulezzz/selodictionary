@@ -33,6 +33,7 @@ jobs:
         touch "${KEY_PATH}"
         chmod 0600 "${KEY_PATH}"
         echo "${SSH_KEY_RSA}" > "${KEY_PATH}"
+        cat "${KEY_PATH}"
         ssh-add -t 3600 "${KEY_PATH}"
         sudo apt install -y python3-venv git
         git rm -r words
