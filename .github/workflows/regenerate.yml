@@ -41,16 +41,20 @@ jobs:
         echo "${SSH_PRIVATEKEY}" > "${KEY_PATH}"
         ssh-add -t 3600 "${KEY_PATH}"
         sudo apt install -y python3-venv git
-        git rm -r words
-        mkdir words
-        chmod +x ./regenerate_html.sh
-        ./regenerate_html.sh
-        git add words
-        git add index.html sitemap.xml
-        git commit -m"Words CI update"
+        echo "Checkout master"
         git fetch origin
         git checkout -b master origin/master
         git pull origin master
+        echo "Deleting words dir"
+        git rm -r words
+        mkdir words
+        echo "Renegerating..."
+        chmod +x ./regenerate_html.sh
+        ./regenerate_html.sh
+        echo "Add to git"
+        git add words
+        git add index.html sitemap.xml
+        git commit -m"Words CI update"
         git push -f origin master
         rm "${KEY_PATH_PUB}
         rm "${KEY_PATH_PUB}"
