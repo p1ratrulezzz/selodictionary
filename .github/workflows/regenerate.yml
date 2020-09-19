@@ -19,6 +19,7 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - uses: actions/checkout@v2
+      name: 'Checkout'
     - name: Install dependencies
       run: |
         git rm -r words
