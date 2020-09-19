@@ -30,12 +30,12 @@ jobs:
       run: |
         KEY_PATH=$(pwd -P)"/deployment-private.key"
         KEY_PATH_PUB=$(pwd -P)"/deployment-public.key"
-        echo "$env:SSH_PUBKEY" > "${KEY_PATH_PUB}"
+        echo "${SSH_PUBKEY}" > "${KEY_PATH_PUB}"
         echo "Adding an SSH key to agent"
         eval $(ssh-agent -s)
         touch "${KEY_PATH}"
         chmod 0600 "${KEY_PATH}"
-        echo "$env:SSH_PRIVATEKEY" > "${KEY_PATH}"
+        echo "${SSH_PRIVATEKEY}" > "${KEY_PATH}"
         ssh-add -t 3600 "${KEY_PATH}"
         sudo apt install -y python3-venv git
         git rm -r words
