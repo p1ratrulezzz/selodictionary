@@ -24,15 +24,18 @@ jobs:
       with:
         python-version: 3.8
     - name: Install dependencies
+      env:
+        SSH_PUBKEY: ${{ secrets.SSH_KEY_PUB  }}
+        SSH_PRIVATEKEY: ${{ secrets.SSH_KEY_RSA }}
       run: |
         KEY_PATH=$(pwd -P)"/deployment-private.key"
         KEY_PATH_PUB=$(pwd -P)"/deployment-public.key"
-        echo ${{ secrets.SSH_KEY_PUB }} > "${KEY_PATH_PUB}"
+        echo "$env:SSH_PUBKEY" > "${KEY_PATH_PUB}"
         echo "Adding an SSH key to agent"
         eval $(ssh-agent -s)
         touch "${KEY_PATH}"
         chmod 0600 "${KEY_PATH}"
-        echo ${{ secrets.SSH_KEY_RSA }} > "${KEY_PATH}"
+        echo "$env:SSH_PRIVATEKEY" > "${KEY_PATH}"
         ssh-add -t 3600 "${KEY_PATH}"
         sudo apt install -y python3-venv git
         git rm -r words
