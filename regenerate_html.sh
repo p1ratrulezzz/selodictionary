@@ -11,7 +11,7 @@ cd $(dirname $0)
 INSTALL_PACKETS="no"
 if [ ! -d "venv" ]; then
     echo "Creating virtual env venv";
-    python3.6 -m venv venv
+    python3 -m venv venv
     INSTALL_PACKETS="yes"
 else
     echo "Virtual env already exists"
