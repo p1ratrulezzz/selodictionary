@@ -18,7 +18,7 @@ git fetch origin
 git checkout -b master origin/master
 git pull origin master
 echo "Deleting words dir"
-git rm -r words || echo words directory doesn't exist
+git rm -rf words || echo "words directory doesn't exist"
 mkdir words
 echo "Renegerating..."
 chmod +x ./regenerate_html.sh
